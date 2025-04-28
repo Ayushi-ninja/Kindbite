@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NGO Dashboard - KindBite</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <!-- LeafletJS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+<script src="js/script.js" defer></script>
+
+</head>
+<body>
+    <!-- Start of Navigation -->
+<nav style="background-color: #b30000; padding: 10px;">
+    <a href="index.html" style="color: white; margin-right: 15px;">Home</a>
+    <a href="donor-dashboard.html" style="color: white; margin-right: 15px;">Donor Dashboard</a>
+    <a href="admin-dashboard.html" style="color: white; margin-right: 15px;">Admin Dashboard</a>
+    <a href="nearby-donations.html" style="color: white; margin-right: 15px;">Nearby Donations</a>
+    <a href="login.html" style="color: white; margin-right: 15px;">Login</a>
+    <a href="ai-insights.html" style="color: white; margin-right: 15px;">AI Insights</a>
+    <a href="impact-testimonials.html" style="color: white; margin-right: 15px;">Impact</a>
+    <a href="our-mission.html" style="color: white; margin-right: 15px;">Mission</a>
+    <a href="about-us.html" style="color: white; margin-right: 15px;">About</a>
+    <a href="contact-us.html" style="color: white;">Contact</a>
+  </nav>
+  <!-- End of Navigation -->
+      </nav>
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <h2>KindBite</h2>
+      <nav>
+        <a href="#">Dashboard</a>
+        <a href="#">Donations</a>
+        <a href="#">Map</a>
+        <a href="#">Logout</a>
+        
+    </aside>
+
+    <main class="main-content">
+      <header>
+        <h1>Nearby Food Donations</h1>
+        <div class="filters">
+          <label>Filter by Type:</label>
+          <select id="typeFilter">
+            <option value="all">All</option>
+            <option value="Vegetables">Vegetables</option>
+            <option value="Cooked Food">Cooked Food</option>
+            <option value="Fruits">Fruits</option>
+          </select>
+          <input type="text" id="searchBar" placeholder="Search by keyword..." />
+        </div>
+      </header>
+
+      <section id="map"></section>
+      <section id="donationList" class="donation-list"></section>
+    </main>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span id="closeModal">&times;</span>
+      <h3>AI Freshness Score</h3>
+      <p>The AI uses temperature, time since preparation, and packaging conditions from IoT sensors to estimate how fresh the food is. Scores range from 0 (stale) to 100 (very fresh).</p>
+    </div>
+  </div>
+
+  <script>
+    const donations = [
+      {
+        id: 1,
+        foodType: 'Cooked Food',
+        quantity: 10,
+        location: [28.61, 77.23],
+        freshness: 'Fresh',
+        freshnessScore: 92,
+        shelfLife: '6 hrs'
+      },
+      {
+        id: 2,
+        foodType: 'Vegetables',
+        quantity: 5,
+        location: [28.62, 77.25],
+        freshness: 'Moderate',
+        freshnessScore: 75,
+        shelfLife: '12 hrs'
+      },
+      {
+        id: 3,
+        foodType: 'Fruits',
+        quantity: 8,
+        location: [28.60, 77.22],
+        freshness: 'Stale',
+        freshnessScore: 55,
+        shelfLife: '3 hrs'
+      }
+    ];
+
+    const map = L.map('map').setView([28.61, 77.23], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+    const donationList = document.getElementById('donationList');
+    const typeFilter = document.getElementById('typeFilter');
+    const searchBar = document.getElementById('searchBar');
+
+    function renderDonations() {
+      const type = typeFilter.value;
+      const keyword = searchBar.value.toLowerCase();
+
+      donationList.innerHTML = '';
+      map.eachLayer(layer => {
+        if (layer instanceof L.Marker) map.removeLayer(layer);
+      });
+
+      donations
+        .filter(d => (type === 'all' || d.foodType === type) &&
+                     (d.foodType.toLowerCase().includes(keyword) || d.freshness.toLowerCase().includes(keyword)))
+        .forEach(d => {
+          const item = document.createElement('div');
+          item.className = 'donation-card';
+          item.innerHTML = `
+            <h3>${d.foodType}</h3>
+            <p>Quantity: ${d.quantity} kg</p>
+            <p>Freshness Score: <strong class="freshness-link" onclick="openModal()">${d.freshnessScore}</strong>/100</p>
+            <p>Shelf Life: ${d.shelfLife}</p>
+            <button onclick="claimDonation(${d.id})">Claim Donation</button>
+          `;
+          donationList.appendChild(item);
+
+          const marker = L.marker(d.location).addTo(map);
+          marker.bindPopup(`<b>${d.foodType}</b><br>${d.quantity} kg`);
+        });
+    }
+
+    function claimDonation(id) {
+      alert('Donation ID ' + id + ' has been claimed.');
+    }
+
+    function openModal() {
+      document.getElementById('modal').style.display = 'block';
+    }
+
+    function closeModal() {
+      document.getElementById('modal').style.display = 'none';
+    }
+
+    document.getElementById('closeModal').onclick = closeModal;
+    window.onclick = e => {
+      if (e.target == document.getElementById('modal')) closeModal();
+    };
+
+    typeFilter.addEventListener('change', renderDonations);
+    searchBar.addEventListener('input', renderDonations);
+
+    setInterval(renderDonations, 10000);
+    renderDonations();
+  </script>
+</body>
+</html>

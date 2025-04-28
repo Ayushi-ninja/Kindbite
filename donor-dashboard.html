@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Donor Dashboard - KindBite</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+<script src="js/script.js" defer></script>
+
+</head>
+<body>
+
+     <!-- Start of Navigation -->
+<nav style="background-color: #b30000; padding: 20px;">
+    <a href="index.html" style="color: white; margin-right: 15px;">Home</a>
+    <a href="donor-dashboard.html" style="color: white; margin-right: 15px;">Donor Dashboard</a>
+    <a href="admin-dashboard.html" style="color: white; margin-right: 15px;">Admin Dashboard</a>
+    <a href="nearby-donations.html" style="color: white; margin-right: 15px;">Nearby Donations</a>
+    <a href="login.html" style="color: white; margin-right: 15px;">Login</a>
+    <a href="ai-insights.html" style="color: white; margin-right: 15px;">AI Insights</a>
+    <a href="impact-testimonials.html" style="color: white; margin-right: 15px;">Impact</a>
+    <a href="our-mission.html" style="color: white; margin-right: 15px;">Mission</a>
+    <a href="about-us.html" style="color: white; margin-right: 15px;">About</a>
+    <a href="contact-us.html" style="color: white;">Contact</a>
+  </nav>
+  <!-- End of Navigation -->
+        </ul>
+      </nav>
+  <header class="top-bar">
+    <h1>🍽️ KindBite | Donor Dashboard</h1>
+    <div class="notification-badges">
+      <span class="badge new">New</span>
+      <span class="badge alert">2 Expiring</span>
+    </div>
+  </header>
+
+  <section class="stats">
+    <div class="stat-card">
+      <h3>Total Donations</h3>
+      <p id="donationCount">0</p>
+    </div>
+    <div class="stat-card">
+      <h3>Approved</h3>
+      <p>12</p>
+    </div>
+    <div class="stat-card">
+      <h3>Picked Up</h3>
+      <p>8</p>
+    </div>
+  </section>
+
+  <section class="chart">
+    <canvas id="donationChart" width="300" height="300"></canvas>
+  </section>
+
+  <section class="form-section">
+    <h2>Add New Donation</h2>
+    <form id="donationForm">
+      <input type="text" id="foodType" placeholder="Food Type" required>
+      <input type="number" id="quantity" placeholder="Quantity (kg)" required>
+      <input type="datetime-local" id="expiry" required>
+      <button type="submit">Submit Donation</button>
+    </form>
+    <div id="successMessage" class="hidden">🎉 Donation added successfully!</div>
+  </section>
+
+  <section class="history">
+    <h2>Donation History</h2>
+    <input type="text" id="searchBar" placeholder="Search by Food Type">
+    <table>
+      <thead>
+        <tr>
+          <th>Food Type</th>
+          <th>Quantity</th>
+          <th>Expiry</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="historyTable">
+        <!-- Rows added dynamically -->
+      </tbody>
+    </table>
+  </section>
+
+  <script>
+    let count = 0;
+
+    const form = document.getElementById('donationForm');
+    const successMessage = document.getElementById('successMessage');
+    const historyTable = document.getElementById('historyTable');
+    const donationCount = document.getElementById('donationCount');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const food = document.getElementById('foodType').value;
+      const qty = document.getElementById('quantity').value;
+      const expiry = document.getElementById('expiry').value;
+
+      const row = `<tr>
+        <td>${food}</td>
+        <td>${qty}kg</td>
+        <td>${new Date(expiry).toLocaleString()}</td>
+        <td><span class="status approved">Approved</span></td>
+      </tr>`;
+      historyTable.innerHTML += row;
+      count++;
+      donationCount.textContent = count;
+
+      successMessage.classList.remove('hidden');
+      setTimeout(() => {
+        successMessage.classList.add('hidden');
+      }, 2500);
+
+      form.reset();
+    });
+
+    const ctx = document.getElementById('donationChart').getContext('2d');
+    const chart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Fruits', 'Rice', 'Bread', 'Veggies'],
+        datasets: [{
+          data: [12, 8, 5, 10],
+          backgroundColor: ['#f87171', '#ef4444', '#dc2626', '#991b1b'],
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'bottom' }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

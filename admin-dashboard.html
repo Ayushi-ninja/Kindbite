@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KindBite Admin Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="css/style.css">
+<script src="js/script.js" defer></script>
+
+</head>
+<body>
+
+     
+        </ul>
+      </nav>
+  <div class="admin-dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2 class="logo">KindBite</h2>
+      <nav>
+        <a href="index.html" style="color: white; margin-right: 15px;">Home</a>
+    <a href="donor-dashboard.html" style="color: white; margin-right: 15px;">Donor Dashboard</a>
+    <a href="admin-dashboard.html" style="color: white; margin-right: 15px;">Admin Dashboard</a>
+    <a href="nearby-donations.html" style="color: white; margin-right: 15px;">Nearby Donations</a>
+    <a href="login.html" style="color: white; margin-right: 15px;">Login</a>
+    <a href="ai-insights.html" style="color: white; margin-right: 15px;">AI Insights</a>
+    <a href="impact-testimonials.html" style="color: white; margin-right: 15px;">Impact</a>
+    <a href="our-mission.html" style="color: white; margin-right: 15px;">Mission</a>
+    <a href="about-us.html" style="color: white; margin-right: 15px;">About</a>
+    <a href="contact-us.html" style="color: white;">Contact</a>
+
+         
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Header -->
+      <header>
+        <h1>Admin Dashboard</h1>
+      </header>
+
+      <!-- Metrics -->
+      <section class="metrics">
+        <div class="card"><h3>Total Donations</h3><p>568</p></div>
+        <div class="card"><h3>Claimed Donations</h3><p>432</p></div>
+        <div class="card"><h3>NGOs</h3><p>27</p></div>
+        <div class="card"><h3>Donors</h3><p>93</p></div>
+      </section>
+
+      <!-- Charts -->
+      <section class="charts">
+        <canvas id="donationTrendChart"></canvas>
+        <canvas id="wasteReductionChart"></canvas>
+      </section>
+
+      <!-- User Management -->
+      <section class="user-management">
+        <h2>User Management</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Role</th>
+              <th>Email</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Green NGO</td>
+              <td>NGO</td>
+              <td>green@ngo.org</td>
+              <td>Active</td>
+              <td><button>Delete</button></td>
+            </tr>
+            <tr>
+              <td>Urban Diner</td>
+              <td>Donor</td>
+              <td>urban@diner.com</td>
+              <td>Active</td>
+              <td><button>Delete</button></td>
+            </tr>
+            <tr>
+              <td>Hope Foundation</td>
+              <td>NGO</td>
+              <td>hope@ngo.org</td>
+              <td>Blocked</td>
+              <td><button>Unblock</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
