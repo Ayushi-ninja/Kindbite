@@ -19,9 +19,36 @@
 
 
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <script>
+    window.addEventListener('load', function() {
+      document.getElementById('loading-spinner').style.display = 'none';
+    });
+    </script>
+    
+
+  <style>
+    .spinner {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #e63946; /* Red color */
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg);}
+      100% { transform: rotate(360deg);}
+    }
+    </style>
 </head>
 
 <body>
+
+  <div id="loading-spinner" style="position:fixed;top:0;left:0;width:100%;height:100%;background:white;display:flex;justify-content:center;align-items:center;z-index:9999;">
+        <div class="spinner"></div>
+      </div>
     <!-- Start of Navigation -->
 <nav style="background-color: #b30000; padding: 10px;">
     <a href="index.html" style="color: white; margin-right: 15px;">Home</a>
@@ -198,7 +225,7 @@
 
       <div class="contact-flex">
         <!-- Contact Form -->
-        <form class="contact-form" action="https://submit-form.com/xNbt7Czxr" method="POST">
+        <form class="contact-form" name="contact" action="https://submit-form.com/xNbt7Czxr" netlify class="contact-form" method="POST">
             <input type="text" name="name" placeholder="Your Name" required />
             <input type="email" name="email" placeholder="Your Email" required />
             <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
@@ -236,7 +263,7 @@
 
     <!-- Donor Form -->
     <div class="auth-form show" id="form-donor">
-      <form netlify class="donor-form" method="POST">
+      <form name="donor-registration"netlify class="donor-form" method="POST">
         <input type="email" placeholder="Donor Email" required>
         <input type="password" placeholder="Password" required>
         <input type="password" placeholder="Confirm Password" required>
@@ -246,7 +273,7 @@
 
     <!-- NGO Form -->
     <div class="auth-form" id="form-ngo">
-      <form netlify class="ngo-form" method="POST">
+      <form name="ngo-registration" netlify class="ngo-form" method="POST">
         <input type="email" placeholder="NGO Email" required>
         <input type="password" placeholder="Password" required>
         <input type="password" placeholder="Confirm Password" required>
@@ -256,7 +283,7 @@
 
     <!-- Admin Form -->
     <div class="auth-form" id="form-admin">
-      <form netlify class="admin-form" method="POST">
+      <form name="admin-login" netlify class="admin-form" method="POST">
         <input type="email" placeholder="Admin Email" required>
         <input type="password" placeholder="Password" required>
         <button type="submit">Login as Admin</button>
