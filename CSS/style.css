@@ -784,15 +784,7 @@ body, html {
     height: 100vh;
   }
   
-  .sidebar {
-    width: 220px;
-    background-color: #b30000;
-    color: white;
-    padding: 20px;
-  }
-  
-  .sidebar nav a {
-    display: block;
+  .display: block;
     color: white;
     text-decoration: none;
     margin-top: 15px;
