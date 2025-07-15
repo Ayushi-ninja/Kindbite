@@ -39,7 +39,7 @@ This is the frontend module of a larger AI + IoT-powered platform that aims to r
 
 
 # 1. Clone the repository
-git clone https://github.com/yourusername/food-donation-frontend.git
+git clone https://github.com/Ayushi-ninja/Kindbite.git
 cd food-donation-frontend
 
 # 2. Install dependencies
