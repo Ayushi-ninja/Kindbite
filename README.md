@@ -72,6 +72,8 @@ If any error appears, try deleting node_modules and reinstall:
 
 📱 Fully responsive layout with mobile-first design
 
+visit the website: https://kindbite.netlify.app/
+
 📌 Contribution
 This project was built by Ayushi Rajput as part of a socially-driven internship project and hackathon submission.
 It demonstrates a commitment to social innovation, web development, and user-focused UI design.
