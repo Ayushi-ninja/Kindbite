@@ -20,11 +20,8 @@ This is the frontend module of a larger AI + IoT-powered platform that aims to r
 
 ---
 
-## 📷 Screenshots
-
-| Donor Panel | NGO Dashboard | Admin Panel |
-|-------------|----------------|--------------|
-| ![Donor UI](screenshots/donor_dashboard.png) | ![NGO UI](screenshots/ngo_dashboard.png) | ![Admin UI](screenshots/admin_dashboard.png) |
+## 📷 visit website
+https://kindbite.netlify.app/
 
 ---
 
